@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import MobileMenu from './MobileMenu';
+import { useAuth } from '@/contexts/AuthContext';
 
 /**
  * Navigation links configuration
@@ -27,6 +28,7 @@ const navLinks = [
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { user, isAdmin, isLoggedIn, logout, isLoading } = useAuth();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -72,6 +74,51 @@ export default function Header() {
               );
             })}
           </nav>
+
+          {/* Auth Section */}
+          <div className="hidden md:flex items-center space-x-3">
+            {isLoading ? (
+              <div className="w-20 h-8 bg-gray-700/50 rounded-lg animate-pulse" />
+            ) : isLoggedIn ? (
+              <>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="px-3 py-2 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
+                  >
+                    管理后台
+                  </Link>
+                )}
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-400">
+                    {user?.username}
+                    {isAdmin && <span className="ml-1 text-amber-400">(管理员)</span>}
+                  </span>
+                  <button
+                    onClick={logout}
+                    className="px-3 py-1.5 text-sm text-gray-300 hover:text-white border border-gray-600 hover:border-gray-500 rounded-lg transition-colors"
+                  >
+                    退出
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="px-3 py-1.5 text-sm text-gray-300 hover:text-white transition-colors"
+                >
+                  登录
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="px-4 py-1.5 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors"
+                >
+                  注册
+                </Link>
+              </>
+            )}
+          </div>
 
           {/* Mobile Menu Button */}
           <button
