@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Global CSS Variables
+ * Blockchain-themed color scheme
+ */
+:root {
+  --background: #0a0a0f;
+  --foreground: #ededed;
+  --emerald-glow: rgba(16, 185, 129, 0.3);
+  --cyan-glow: rgba(6, 182, 212, 0.3);
+}
+
+/**
+ * Base Styles
+ * Requirements: 9.1, 9.2, 9.4
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/**
+ * Responsive Typography
+ * Scales based on viewport width
+ */
+@layer base {
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold;
+  }
+  
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl font-semibold;
+  }
+  
+  p {
+    @apply text-sm sm:text-base;
+  }
+}
+
+/**
+ * Responsive Container Utilities
+ */
+@layer components {
+  .container-responsive {
+    @apply w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+  }
+  
+  .card-responsive {
+    @apply p-4 sm:p-6 rounded-lg sm:rounded-xl;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+  
+  .btn-responsive {
+    @apply px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base;
+  }
+}
+
+/**
+ * Custom Utility Classes
+ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Gradient text utility */
+  .text-gradient {
+    @apply bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+  
+  /* Glow effects */
+  .glow-emerald {
+    box-shadow: 0 0 20px var(--emerald-glow);
+  }
+  
+  .glow-cyan {
+    box-shadow: 0 0 20px var(--cyan-glow);
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Responsive image container */
+  .img-responsive {
+    @apply w-full h-auto object-cover;
+  }
+  
+  /* Safe area padding for mobile devices */
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/**
+ * Focus styles for accessibility
+ */
+@layer base {
+  :focus-visible {
+    @apply outline-none ring-2 ring-emerald-400 ring-offset-2 ring-offset-[#0a0a0f];
+  }
+  
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-none ring-2 ring-emerald-400 ring-offset-2 ring-offset-[#0a0a0f];
+  }
+}
+
+/**
+ * Custom scrollbar for desktop
+ */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0a0a0f;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+  }
+}

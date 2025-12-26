@@ -1,0 +1,58 @@
+{
+  "name": "Blockchain Developer",
+  "avatar": "",
+  "bio": "A passionate blockchain developer and educator focused on sharing knowledge about cryptocurrency, trading strategies, and decentralized technologies.\n\nI believe in the transformative power of blockchain technology and am dedicated to helping others understand and navigate this exciting space.",
+  "skills": [
+    "Blockchain Development",
+    "Smart Contracts",
+    "Solidity",
+    "Web3.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Trading Analysis",
+    "DeFi Protocols"
+  ],
+  "experience": [
+    {
+      "title": "Senior Blockchain Developer",
+      "company": "DeFi Protocol",
+      "period": "2022 - Present",
+      "description": "Leading the development of decentralized finance applications and smart contracts."
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Tech Startup",
+      "period": "2020 - 2022",
+      "description": "Built scalable web applications using React, Node.js, and cloud technologies."
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Enterprise Solutions",
+      "period": "2018 - 2020",
+      "description": "Developed enterprise software solutions and gained experience in system architecture."
+    }
+  ],
+  "socialLinks": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com",
+      "icon": "🐙"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://twitter.com",
+      "icon": "🐦"
+    },
+    {
+      "platform": "Telegram",
+      "url": "https://t.me",
+      "icon": "✈️"
+    },
+    {
+      "platform": "Email",
+      "url": "mailto:contact@example.com",
+      "icon": "📧"
+    }
+  ]
+}
