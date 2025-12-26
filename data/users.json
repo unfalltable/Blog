@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "user_admin_001",
+    "username": "admin",
+    "passwordHash": "$2b$10$Wr3ttk3gW2Bpbf7RQx7/Be7mx7fqd6IlHZjuUkwPymXVknJxQLQWe",
+    "role": "admin",
+    "createdAt": "2025-12-26T00:00:00.000Z"
+  },
+  {
+    "id": "user_1766732830441_5gzxymf",
+    "username": "gavin",
+    "passwordHash": "$2b$10$hijcYTYLXNdQAzu7r7eSYOPR7AjcNxhUIsmTZjOY1SvilWpjh0ru2",
+    "role": "visitor",
+    "createdAt": "2025-12-26T07:07:10.441Z"
+  }
+]

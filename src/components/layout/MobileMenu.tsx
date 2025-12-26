@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface NavLink {
   href: string;
@@ -26,6 +27,8 @@ export default function MobileMenu({
   navLinks,
   currentPath,
 }: MobileMenuProps) {
+  const { user, isAdmin, isLoggedIn, logout } = useAuth();
+
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -48,6 +51,11 @@ export default function MobileMenu({
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
+
+  const handleLogout = () => {
+    logout();
+    onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -87,47 +95,51 @@ export default function MobileMenu({
               </Link>
             );
           })}
-        </nav>
 
-        {/* Social Links in Mobile Menu */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-emerald-500/20">
-          <div className="flex justify-center space-x-6">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-emerald-400 transition-colors text-2xl"
-              aria-label="GitHub"
-            >
-              🐙
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-emerald-400 transition-colors text-2xl"
-              aria-label="Twitter"
-            >
-              🐦
-            </a>
-            <a
-              href="https://t.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-emerald-400 transition-colors text-2xl"
-              aria-label="Telegram"
-            >
-              ✈️
-            </a>
-            <a
-              href="mailto:contact@example.com"
-              className="text-gray-400 hover:text-emerald-400 transition-colors text-2xl"
-              aria-label="Email"
-            >
-              📧
-            </a>
+          {/* Auth Section */}
+          <div className="pt-4 mt-4 border-t border-gray-800">
+            {isLoggedIn ? (
+              <>
+                <div className="px-4 py-2 text-sm text-gray-400">
+                  {user?.username}
+                  {isAdmin && <span className="ml-1 text-amber-400">(管理员)</span>}
+                </div>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    onClick={onClose}
+                    className="block px-4 py-3 text-amber-400 hover:bg-amber-500/10 rounded-lg"
+                  >
+                    管理后台
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg"
+                >
+                  退出登录
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg"
+                >
+                  登录
+                </Link>
+                <Link
+                  href="/auth/register"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-emerald-400 hover:bg-emerald-500/10 rounded-lg"
+                >
+                  注册
+                </Link>
+              </>
+            )}
           </div>
-        </div>
+        </nav>
       </div>
     </>
   );
