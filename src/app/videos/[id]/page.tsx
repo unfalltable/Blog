@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getVideoById, getVideoRouting } from '@/services/videos';
 import { VideoPlayer } from '@/components/videos';
+import { CommentSection } from '@/components/common/CommentSection';
 
 interface VideoDetailPageProps {
   params: Promise<{ id: string }>;
@@ -24,11 +25,11 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
   // If external video, redirect to external source
   if (routing.type === 'external') {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Link
             href="/videos"
-            className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+            className="inline-flex items-center text-sm text-emerald-400 hover:text-emerald-300 mb-6"
           >
             <svg
               className="w-4 h-4 mr-2"
@@ -47,7 +48,7 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
             返回视频列表
           </Link>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
+          <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-8 text-center">
             <svg
               className="mx-auto h-16 w-16 text-gray-400 mb-4"
               fill="none"
@@ -62,10 +63,10 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
               />
             </svg>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-2xl font-bold text-white mb-2">
               {video.title}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-400 mb-6">
               此视频托管在外部平台，点击下方按钮前往观看
             </p>
             <a
@@ -91,6 +92,9 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
               </svg>
             </a>
           </div>
+
+          {/* Comments Section */}
+          <CommentSection targetType="video" targetId={video.id} />
         </div>
       </div>
     );
@@ -103,11 +107,11 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-[#0a0a0f]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           href="/videos"
-          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+          className="inline-flex items-center text-sm text-emerald-400 hover:text-emerald-300 mb-6"
         >
           <svg
             className="w-4 h-4 mr-2"
@@ -126,39 +130,42 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
           返回视频列表
         </Link>
 
-        <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <article className="bg-gray-900/50 rounded-xl border border-gray-800 overflow-hidden">
           {/* Video Player */}
           <VideoPlayer video={video} />
 
           {/* Video Info */}
           <div className="p-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-2xl font-bold text-white">
               {video.title}
             </h1>
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              <span className="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full">
+              <span className="px-3 py-1 text-sm bg-purple-500/20 text-purple-400 rounded-full">
                 {video.category}
               </span>
               {video.author && (
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-sm text-gray-400">
                   作者: {video.author}
                 </span>
               )}
-              <time className="text-sm text-gray-500 dark:text-gray-400">
+              <time className="text-sm text-gray-500">
                 {formattedDate}
               </time>
             </div>
 
             {video.description && (
-              <div className="mt-6 prose dark:prose-invert max-w-none">
-                <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+              <div className="mt-6 prose prose-invert max-w-none">
+                <p className="text-gray-300 whitespace-pre-wrap">
                   {video.description}
                 </p>
               </div>
             )}
           </div>
         </article>
+
+        {/* Comments Section */}
+        <CommentSection targetType="video" targetId={video.id} />
       </div>
     </div>
   );

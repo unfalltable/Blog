@@ -38,8 +38,52 @@ export interface Project {
   status: ProjectStatus;
   currentState: string;
   prospects: string;
+  interestCount: number;
   createdAt: string;
   updatedAt: string;
+}
+
+// ============================================
+// Project Interest Interface
+// ============================================
+
+export interface ProjectInterest {
+  id: string;
+  projectId: string;
+  userId: string;
+  username: string;
+  createdAt: string;
+}
+
+// ============================================
+// Project Comment Interface
+// ============================================
+
+export interface ProjectComment {
+  id: string;
+  projectId: string;
+  userId: string;
+  username: string;
+  content: string;
+  createdAt: string;
+}
+
+// ============================================
+// Generic Comment Interface (with reply support)
+// ============================================
+
+export type CommentTargetType = 'note' | 'video' | 'resource' | 'project';
+
+export interface Comment {
+  id: string;
+  targetType: CommentTargetType;
+  targetId: string;
+  userId: string;
+  username: string;
+  content: string;
+  parentId: string | null; // null for top-level comments, id for replies
+  replyCount: number;
+  createdAt: string;
 }
 
 // ============================================

@@ -89,17 +89,28 @@ export default function Header() {
                     管理后台
                   </Link>
                 )}
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-400">
-                    {user?.username}
-                    {isAdmin && <span className="ml-1 text-amber-400">(管理员)</span>}
-                  </span>
-                  <button
-                    onClick={logout}
-                    className="px-3 py-1.5 text-sm text-gray-300 hover:text-white border border-gray-600 hover:border-gray-500 rounded-lg transition-colors"
-                  >
-                    退出
+                <div className="relative group">
+                  <button className="flex items-center space-x-1 text-sm text-gray-400 hover:text-white transition-colors px-3 py-2">
+                    <span>{user?.username}</span>
+                    {isAdmin && <span className="text-amber-400">(管理员)</span>}
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
                   </button>
+                  <div className="absolute right-0 mt-1 w-40 bg-gray-900 border border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <Link
+                      href="/auth/change-password"
+                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-t-lg"
+                    >
+                      修改密码
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-b-lg"
+                    >
+                      退出登录
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (

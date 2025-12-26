@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Resource } from '@/types';
 
 interface ResourceCardProps {
@@ -49,16 +50,16 @@ export function ResourceCard({ resource, onRequestAccess }: ResourceCardProps) {
   const getTypeColor = (type: Resource['type']) => {
     switch (type) {
       case 'contact':
-        return 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
+        return 'bg-blue-500/20 text-blue-400';
       case 'group':
-        return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
+        return 'bg-green-500/20 text-green-400';
       case 'third-party':
-        return 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200';
+        return 'bg-purple-500/20 text-purple-400';
     }
   };
 
   return (
-    <article className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+    <article className="p-6 bg-gray-900/50 rounded-xl border border-gray-800 hover:border-emerald-500/50 transition-colors">
       <div className="flex items-start gap-4">
         <div className={`p-3 rounded-lg ${getTypeColor(resource.type)}`}>
           {getTypeIcon(resource.type)}
@@ -66,23 +67,26 @@ export function ResourceCard({ resource, onRequestAccess }: ResourceCardProps) {
         
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <Link 
+              href={`/resources/${resource.id}`}
+              className="text-lg font-semibold text-white hover:text-emerald-400 transition-colors"
+            >
               {resource.name}
-            </h3>
+            </Link>
             <span className={`px-2 py-0.5 text-xs rounded-full ${getTypeColor(resource.type)}`}>
               {getTypeLabel(resource.type)}
             </span>
           </div>
           
           {resource.description && (
-            <p className="text-gray-600 dark:text-gray-300 mb-3">
+            <p className="text-gray-400 mb-3">
               {resource.description}
             </p>
           )}
           
           {resource.isProtected ? (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+              <span className="text-sm text-gray-500 flex items-center gap-1">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -91,7 +95,7 @@ export function ResourceCard({ resource, onRequestAccess }: ResourceCardProps) {
               {onRequestAccess && (
                 <button
                   onClick={() => onRequestAccess(resource.id)}
-                  className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+                  className="px-3 py-1 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors"
                 >
                   申请访问
                 </button>
@@ -99,16 +103,23 @@ export function ResourceCard({ resource, onRequestAccess }: ResourceCardProps) {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-900 dark:text-white">
+              <span className="text-sm font-medium text-emerald-400 font-mono">
                 {resource.value}
               </span>
               {resource.attribution && (
-                <span className="text-xs text-gray-500 dark:text-gray-400">
+                <span className="text-xs text-gray-500">
                   (来源: {resource.attribution})
                 </span>
               )}
             </div>
           )}
+
+          <Link 
+            href={`/resources/${resource.id}`}
+            className="inline-block mt-3 text-sm text-gray-400 hover:text-emerald-400 transition-colors"
+          >
+            查看详情与评论 →
+          </Link>
         </div>
       </div>
     </article>

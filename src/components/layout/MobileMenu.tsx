@@ -113,6 +113,13 @@ export default function MobileMenu({
                     管理后台
                   </Link>
                 )}
+                <Link
+                  href="/auth/change-password"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg"
+                >
+                  修改密码
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg"

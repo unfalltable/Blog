@@ -8,6 +8,9 @@ import {
   Reply,
   User,
   Profile,
+  ProjectInterest,
+  ProjectComment,
+  Comment,
 } from '@/types';
 import { JsonStorageService, ProfileStorageService } from './storage';
 
@@ -24,3 +27,6 @@ export const discussionsRepository = new JsonStorageService<Discussion>('discuss
 export const repliesRepository = new JsonStorageService<Reply>('replies.json');
 export const usersRepository = new JsonStorageService<User>('users.json');
 export const profileRepository = new ProfileStorageService<Profile>('profile.json');
+export const projectInterestsRepository = new JsonStorageService<ProjectInterest>('project-interests.json');
+export const projectCommentsRepository = new JsonStorageService<ProjectComment>('project-comments.json');
+export const commentsRepository = new JsonStorageService<Comment>('comments.json');
